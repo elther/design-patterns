@@ -2,6 +2,7 @@ package com.example.designpatterns.singleton;
 
 public class Settings {
 
+    // volatile java i.5 higher
     private static volatile Settings instance;
 
     private Settings(){ }
