@@ -2,19 +2,21 @@ package com.example.designpatterns.singleton;
 
 import java.io.Serializable;
 
-public class Settings implements Serializable {
+public enum Settings {
 
-    private Settings(){ }
+    INSTANCE;
 
-    private static class SettingsHolder{
-        private static final Settings INSTANCE = new Settings();
+    Settings(){
+
     }
 
-    public static Settings getInstance(){
-        return SettingsHolder.INSTANCE;
+    private Integer number;
+
+    public Integer getNumber() {
+        return number;
     }
 
-    protected Object readResolve(){
-        return getInstance();
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 }
