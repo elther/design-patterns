@@ -2,20 +2,13 @@ package com.example.designpatterns.singleton;
 
 public class Settings {
 
-    // volatile java i.5 higher
-    private static volatile Settings instance;
-
     private Settings(){ }
 
-    // synchronized 성능에 별로 좋지 않다..
+    private static class SettingsHolder{
+        private static final Settings INSTANCE = new Settings();
+    }
+
     public static Settings getInstance(){
-        if(instance == null){
-            synchronized (Settings.class){
-                if(instance == null){
-                    instance = new Settings();
-                }
-            }
-        }
-        return instance;
+        return SettingsHolder.INSTANCE;
     }
 }
