@@ -5,13 +5,15 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 public class App {
-    public static void main(String[] args) throws IOException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         Settings settings = Settings.INSTANCE;
         Settings settings1 = null;
-        Constructor<?>[] constructors = Settings.class.getDeclaredConstructors();
-        for(Constructor<?> constructor : constructors){
-            constructor.setAccessible(true);
-            settings1 = (Settings) constructor.newInstance("INSTANCE");
+        try(ObjectOutput out = new ObjectOutputStream(new FileOutputStream("settings.obj"))){
+            out.writeObject(settings);
+        }
+
+        try(ObjectInput in = new ObjectInputStream(new FileInputStream("settings.obj"))){
+            settings1 = (Settings) in.readObject();
         }
 
         System.out.println(settings == settings1);
