@@ -6,4 +6,9 @@ public class BlackShipFactory implements ShipFactory{
     public Ship createShip() {
         return new BlackShip();
     }
+
+    @Override
+    public void sendEmailTo(String email, Ship ship) {
+
+    }
 }
